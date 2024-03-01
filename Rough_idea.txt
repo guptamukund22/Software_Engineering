@@ -1,0 +1,64 @@
+1. Ingredients given- Reciepe output with nutritional value
+2. An App solving campus issues- PYQs and resource repositories
+3. Travel manager-
+4. Manage bookings ofacademic rooms on our campus
+
+
+Functional Requirements:
+1. Given set of ingredients, we output the potential receipes
+	1.1 Indicate the items available and the items needed to buy
+2. Nutritional value of given cuisines
+4. Monitor the fridge repository
+
+Non-Functional Requirement:
+1. Food diversity
+
+
+
+Architecture:
+1. MVC
+2. 2 layered Client- Server Architecture
+3. Pipe-filter Architecture -to push notifications
+
+Lifecyle: Agile
+
+Modules:
+
+1. User
+2. Recipe teller
+3. Nutritional Value teller
+4. Repository Manager
+5. Cuisines manager
+
+Tech Stacks:
+1. Flutter - Development
+2. Firebase / Django / Datastore (Choose one of them) - Data storage
+
+Models to be used:
+1. Recipe Teller : Stacking
+2. Nutritional Value teller: Fetching - based on majority vote
+
+Metrics:
+1. Cohesion
+2. ABC
+3. Cyclomatic complexity
+4. Halstead (Optional)
+
+Complete the Software Requirement Specification Document
+Mukund Gupta
+Introduction
+Overview
+Activity Diagrams
+Sumeet S Patil
+Module and Class Definitions
+Functional and Non-Functional Requirements
+Class Diagram
+Tanmay Parashar
+Package Diagram
+Constraints and Acceptance Criteria
+Use Case diagram
+
+
+
+
+
