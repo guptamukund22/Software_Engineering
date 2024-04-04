@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_teller/home.dart';
-import 'package:recipe_teller/login.dart';
+import 'package:recipe_teller/basic_structure.dart';
+import 'package:recipe_teller/authentication/login.dart';
+import 'package:recipe_teller/onboarding/onboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Login(),
+      home: onboard(),
     );
   }
 }

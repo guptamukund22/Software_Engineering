@@ -7,7 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
-import 'package:recipe_teller/home.dart';
+import 'package:recipe_teller/basic_structure.dart';
 
 List<String> recipients = [];
 //EmailOTP myauth = EmailOTP();
@@ -200,8 +200,10 @@ class _LoginState extends State<Login> {
                   child: GestureDetector(
                     onTap: () {
                       if (verified) {
-                        Navigator.push(context,
-                            CupertinoPageRoute(builder: (context) => Home()));
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => basic_structure()));
                       } else {
                         setState(() {
                           otp_write = 1;
