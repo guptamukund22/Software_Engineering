@@ -1,9 +1,7 @@
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_teller/basic_structure.dart';
-import 'package:recipe_teller/onboarding/fourth_page.dart';
 
 class third_page extends StatelessWidget {
   @override

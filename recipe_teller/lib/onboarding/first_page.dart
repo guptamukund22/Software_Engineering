@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_teller/basic_structure.dart';
-import 'package:recipe_teller/onboarding/second_page.dart';
 
 class first_page extends StatelessWidget {
   @override
