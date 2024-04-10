@@ -1,12 +1,12 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, camel_case_types
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:motion_tab_bar/MotionTabBar.dart';
 import 'package:recipe_teller/Home/home.dart';
 import 'package:recipe_teller/contact_us/know_more.dart';
+import 'package:recipe_teller/cuisines/cuisines.dart';
+import 'package:recipe_teller/fridge/category_card.dart';
+import 'package:recipe_teller/fridge/fridge.dart';
 import 'package:recipe_teller/my_flutter_app_icons.dart';
 import 'package:recipe_teller/recipe/recipe.dart';
 
@@ -79,23 +79,19 @@ class _HomeState extends State<basic_structure> {
               active_index = value;
             });
           },
-          initialSelectedTab: "About Us",
+          initialSelectedTab: "Home",
           labels: const [
             "Cuisines",
-            "Recipe Teller",
+            "Recipe Generator",
             "Home",
-            "Fridge",
+            "My Fridge",
             "About Us"
           ]),
       body: [
-        Container(
-          color: Colors.blue,
-        ),
-        recipe(),
+        Cuisines(),
+        RecipePage(),
         home(),
-        Container(
-          color: Colors.black,
-        ),
+        Fridge(),
         know_more()
       ][active_index],
     );

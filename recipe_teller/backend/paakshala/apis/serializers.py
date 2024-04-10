@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from paakshala_project import models
 
-class paakshala_Serializer(serializers.ModelSerializer):
+class item_Serializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
@@ -11,3 +11,21 @@ class paakshala_Serializer(serializers.ModelSerializer):
             'added_on',
         )
         model = models.item
+
+class category_Serializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'id',
+            'name',
+            'Reminder_Duration'
+        )
+        model = models.Category
+
+class User_Serializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'id',
+            'mailid',
+            'categories_list'
+        )
+        model = models.User

@@ -1,19 +1,21 @@
-import 'dart:math';
+// ignore_for_file: non_constant_identifier_names, camel_case_types, duplicate_ignore
 
-//import 'package:email_otp/email_otp.dart';
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_teller/authentication/User_add.dart';
+import 'package:recipe_teller/authentication/User_api.dart';
 import 'package:recipe_teller/basic_structure.dart';
+import 'package:recipe_teller/onboarding/onboard.dart';
 
-List<String> recipients = [];
 //EmailOTP myauth = EmailOTP();
 
-TextEditingController? _controller;
-TextEditingController? _otp;
+TextEditingController _controller = TextEditingController();
+TextEditingController _otp = TextEditingController();
+TextEditingController _mailid = TextEditingController();
 String otp = '';
 bool verified = false;
 int otp_write = 0;
@@ -34,14 +36,14 @@ class _LoginState extends State<Login> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   height: 210,
                   width: MediaQuery.sizeOf(context).width,
                   child: Stack(
                     children: [
                       Container(
                         alignment: Alignment.topLeft,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage("assets/images/dot.jpg"),
                                 fit: BoxFit.cover)),
@@ -52,7 +54,7 @@ class _LoginState extends State<Login> {
                         left: MediaQuery.sizeOf(context).width * 0.65,
                         child: Container(
                           alignment: Alignment.topLeft,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage("assets/images/cir.png"),
                                   fit: BoxFit.cover)),
@@ -64,24 +66,23 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 25, bottom: 10),
-                  child: Text("Create Account",
+                  padding: const EdgeInsets.only(left: 25, bottom: 10),
+                  child: const Text("Create Account",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 28,
                           fontWeight: FontWeight.w500)),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 25, bottom: 20),
-                  child: Text("Please enter valid details to continue",
+                  padding: const EdgeInsets.only(left: 25, bottom: 20),
+                  child: const Text("Please enter valid details to continue",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
                           fontWeight: FontWeight.w200)),
                 ),
                 Container(
-                    alignment: Alignment.topLeft,
-                    padding: EdgeInsets.only(left: 25),
+                    alignment: Alignment.topCenter,
                     child: Container(
                       width: 300,
                       height: 300,
@@ -91,38 +92,37 @@ class _LoginState extends State<Login> {
                       ),
                       child: Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
-                          field(
-                            obscure: true,
+                          const field(
                             hint: "Username",
                             icon: Icon(Icons.person),
                           ),
                           Container(
                             width: 250,
                             height: 5,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 border: BorderDirectional(
                                     bottom: BorderSide(
                                         color: Colors.white10, width: 0.5))),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
-                          field_phone(
+                          const field_phone(
                             hint: "Mail",
                             icon: Icon(Icons.mail),
                           ),
                           Container(
                             width: 250,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 border: BorderDirectional(
                                     bottom: BorderSide(
                                         color: Colors.white10, width: 0.5))),
                             height: 5,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           TextButton(
@@ -133,45 +133,34 @@ class _LoginState extends State<Login> {
                                   int num = rng.nextInt(9);
                                   otp = otp + num.toString();
                                 }
-                                print(recipients);
+
                                 final SmtpServer = gmail(
                                     'recipe.teller.iitj@gmail.com',
                                     "jnbxxfynzzopiwid");
                                 final Message message = Message();
-                                message.from = Address(
+                                message.from = const Address(
                                     'recipe.teller.iitj@gmail.com',
                                     'Recipe Teller');
-                                message.recipients = [
-                                  recipients[recipients.length - 1]
-                                ];
+                                message.recipients = [_mailid.text];
                                 message.subject = "OTP Verification";
                                 message.text =
                                     "Welcome to our App.\n Your OTP is $otp";
                                 await send(message, SmtpServer);
-                                /* myauth.setConfig(
-                                    appName: "Recipe Teller",
-                                    appEmail: "sumeetpatil20004@gmail.com",
-                                    userEmail:
-                                        recipients[recipients.length - 1],
-                                    otpLength: 6,
-                                    otpType: OTPType.digitsOnly);
-                                await myauth.sendOTP();*/
-
                                 setState(() {
                                   otp_sent = 1;
                                 });
                               },
-                              child: Text("Get OTP")),
+                              child: const Text("Get OTP")),
                           [
                             Container(),
-                            field_otp(
+                            const field_otp(
                               hint: "Enter the OTP",
                               icon: Icon(Icons.lock),
                             )
                           ][otp_sent],
                           Container(
                             width: 250,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 border: BorderDirectional(
                                     bottom: BorderSide(
                                         color: Colors.white10, width: 0.5))),
@@ -179,8 +168,8 @@ class _LoginState extends State<Login> {
                           ),
                           [
                             Container(),
-                            Center(
-                              child: Container(
+                            const Center(
+                              child: SizedBox(
                                 height: 40,
                                 width: 120,
                                 child: Text(
@@ -198,12 +187,26 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.only(
                       left: MediaQuery.sizeOf(context).width * 0.6, top: 20),
                   child: GestureDetector(
-                    onTap: () {
-                      if (verified) {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                                builder: (context) => basic_structure()));
+                    onTap: () async {
+                      if (true) {
+                        final String username = _controller.text;
+                        final String mailid = _mailid.text;
+                        if (username.isEmpty || mailid.isEmpty) {
+                        } else {
+                          final User user =
+                              User(username: username, mailid: mailid);
+                          print(username);
+                          print(mailid);
+                          UserProvider provider = UserProvider();
+                          bool added = await provider.addUser(user);
+                          print(added);
+                          if (added) {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => onboard()));
+                          }
+                        }
                       } else {
                         setState(() {
                           otp_write = 1;
@@ -234,7 +237,7 @@ class _LoginState extends State<Login> {
                                 bottomRight: Radius.circular(10)),
                             color: Color.fromRGBO(66, 165, 245, 0.7),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_forward,
                             color: Colors.white,
                           ),
@@ -262,82 +265,39 @@ class _LoginState extends State<Login> {
 class field extends StatefulWidget {
   final String hint;
   final Icon icon;
-  final bool obscure;
 
-  field(
-      {Key? key,
-      TextEditingController? controller,
-      required this.hint,
-      required this.icon,
-      required this.obscure});
+  const field({
+    super.key,
+    TextEditingController? controller,
+    required this.hint,
+    required this.icon,
+  });
 
   @override
   State<field> createState() => _fieldState();
 }
 
 class _fieldState extends State<field> {
-  int j = 0;
-  int i = 0;
-  bool obscure = true;
-  void initState() {
-    obscure = widget.obscure;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (widget.obscure) {
-      setState(() {
-        i = 1;
-      });
-    }
     return Container(
         decoration: BoxDecoration(
             color: Colors.transparent, borderRadius: BorderRadius.circular(10)),
         height: 55,
         width: 250,
-        child: Row(
-          children: [
-            Container(
-              width: 200,
-              child: TextField(
-                controller: _controller,
-                onChanged: (value) {
-                  recipients.add(value);
-                },
-                style: TextStyle(color: Colors.white),
-                obscureText: [true, false][j],
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    iconColor: Colors.white,
-                    icon: widget.icon,
-                    hintText: widget.hint,
-                    hintStyle: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w200)),
-              ),
-            ),
-            [
-              Container(),
-              IconButton(
-                  onPressed: () {
-                    setState(() {
-                      if (j == 0) {
-                        j = 1;
-                      } else {
-                        j = 0;
-                      }
-                    });
-                  },
-                  icon: [
-                    Icon(Icons.remove_red_eye_outlined),
-                    Image.asset(
-                      "assets/images/eye.png",
-                      width: 30,
-                      height: 30,
-                    ),
-                  ][j]),
-            ][i]
-          ],
+        child: SizedBox(
+          width: 200,
+          child: TextField(
+            controller: _controller,
+            style: const TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                iconColor: Colors.white,
+                icon: widget.icon,
+                hintText: widget.hint,
+                hintStyle: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w200)),
+          ),
         ));
   }
 }
@@ -346,8 +306,8 @@ class field_otp extends StatefulWidget {
   final String hint;
   final Icon icon;
 
-  field_otp({
-    Key? key,
+  const field_otp({
+    super.key,
     required this.hint,
     required this.icon,
   });
@@ -357,9 +317,6 @@ class field_otp extends StatefulWidget {
 }
 
 class _fieldState_otp extends State<field_otp> {
-  int j = 0;
-  int i = 0;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -368,28 +325,26 @@ class _fieldState_otp extends State<field_otp> {
         height: 55,
         width: 250,
         child: Row(children: [
-          Container(
+          SizedBox(
             width: 200,
             child: TextField(
               obscureText: true,
               keyboardType: TextInputType.number,
               controller: _otp,
               onChanged: (value) {
-                print(otp);
-                print(value);
                 value.replaceAll(' ', '');
                 if (value == otp) {
                   verified = true;
                   otp = '';
                 }
               },
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                   border: InputBorder.none,
                   iconColor: Colors.white,
                   icon: widget.icon,
                   hintText: widget.hint,
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w200)),
             ),
           )
@@ -401,8 +356,8 @@ class field_phone extends StatefulWidget {
   final String hint;
   final Icon icon;
 
-  field_phone({
-    Key? key,
+  const field_phone({
+    super.key,
     required this.hint,
     required this.icon,
   });
@@ -413,9 +368,6 @@ class field_phone extends StatefulWidget {
 
 // ignore: camel_case_types
 class _fieldState_phone extends State<field_phone> {
-  int j = 0;
-  int i = 0;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -424,21 +376,18 @@ class _fieldState_phone extends State<field_phone> {
         height: 55,
         width: 250,
         child: Row(children: [
-          Container(
+          SizedBox(
             width: 200,
             child: TextField(
               keyboardType: TextInputType.emailAddress,
-              controller: _controller,
-              onChanged: (value) {
-                recipients.add(value);
-              },
-              style: TextStyle(color: Colors.white),
+              controller: _mailid,
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                   border: InputBorder.none,
                   iconColor: Colors.white,
                   icon: widget.icon,
                   hintText: widget.hint,
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w200)),
             ),
           )

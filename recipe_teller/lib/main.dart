@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_teller/authentication/login.dart';
+import 'package:recipe_teller/basic_structure.dart';
 import 'package:recipe_teller/onboarding/onboard.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -13,12 +16,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Paakshala',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue[300]!),
         useMaterial3: true,
       ),
-      home: onboard(),
+      home: basic_structure(),
     );
   }
 }
