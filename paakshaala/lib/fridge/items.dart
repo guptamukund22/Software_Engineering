@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, camel_case_types
+// ignore_for_file: non_constant_identifier_names, camel_case_types, must_be_immutable
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +6,6 @@ import 'package:paakshaala/constants/fonts.dart';
 import 'package:paakshaala/fridge/chef_desk.dart';
 import 'package:paakshaala/fridge/delete_item.dart';
 import 'package:paakshaala/fridge/edit_item.dart';
-
-int added = 0;
 
 class items extends StatefulWidget {
   final String category;
@@ -48,6 +46,16 @@ class items extends StatefulWidget {
 }
 
 class _itemsState extends State<items> {
+  int added = 0;
+  @override
+  void initState() {
+    super.initState();
+    print(mychefDesk);
+    if (mychefDesk.contains(widget.item_name)) {
+      added = 1;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -66,6 +66,16 @@ class _know_moreState extends State<know_more> {
               ),
               CarouselSlider(
                   items: [
+                    mentor(
+                        name: 'Dr. Romi Banerjee',
+                        googlescholar:
+                            'https://scholar.google.com/citations?user=BiSvmeMAAAAJ&hl=en',
+                        page: "https://sites.google.com/site/romibitsnbob/home",
+                        linkedin:
+                            "https://www.linkedin.com/in/romi-banerjee-a045b5197/?originalSubdomain=in",
+                        designation: 'Mentor',
+                        position:
+                            'Professor,\nIndian Institute of Technology, Jodhpur'),
                     member(
                         name: 'Sumeet S Patil',
                         linkedin:
@@ -90,15 +100,6 @@ class _know_moreState extends State<know_more> {
                             "https://www.instagram.com/tanmayparashar31/",
                         github: "https://github.com/tanmaycd",
                         designation: 'Developer and Tester',
-                        position: 'B.Tech 2nd year'),
-                    mentor(
-                        name: 'Dr. Romi Banerjee',
-                        googlescholar:
-                            'https://scholar.google.com/citations?user=BiSvmeMAAAAJ&hl=en',
-                        page: "https://sites.google.com/site/romibitsnbob/home",
-                        linkedin:
-                            "https://www.linkedin.com/in/romi-banerjee-a045b5197/?originalSubdomain=in",
-                        designation: 'Developer',
                         position: 'B.Tech 2nd year'),
                   ],
                   options: CarouselOptions(
@@ -311,16 +312,23 @@ class _mentorState extends State<mentor> {
           SizedBox(
             height: 10,
           ),
-          Text(
-            'Role: ${widget.designation}',
-            style: GoogleFonts.lora(fontSize: 20),
+          Container(
+            alignment: Alignment.topCenter,
+            child: Text(
+              'Role: ${widget.designation}',
+              style: GoogleFonts.lora(fontSize: 20),
+            ),
           ),
           SizedBox(
             height: 10,
           ),
-          Text(
-            "Currently: ${widget.position}",
-            style: GoogleFonts.lora(fontSize: 20),
+          Container(
+            alignment: Alignment.center,
+            child: Text(
+              textAlign: TextAlign.center,
+              "Currently: ${widget.position}",
+              style: GoogleFonts.lora(fontSize: 20),
+            ),
           ),
           SizedBox(
             height: 40,

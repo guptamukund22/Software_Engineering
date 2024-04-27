@@ -1,10 +1,10 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:animations/animations.dart';
-import 'package:camera/camera.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 import 'package:paakshaala/constants/fonts.dart';
 import 'package:paakshaala/constants/fridge_items.dart';
 import 'package:paakshaala/fridge/add_item.dart';

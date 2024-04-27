@@ -1,11 +1,11 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 
-import 'package:http/http.dart' as http;
 import 'package:paakshaala/constants/fridge_items.dart';
 import 'package:paakshaala/fridge/items.dart';
 
@@ -30,17 +30,32 @@ class Recipe {
   factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(
         name: json['name'],
-        ingredients: json['ingredients'],
-        instructions: json['instructions'],
+        ingredients: getIngredients(json['ingredients']),
+        instructions: getInstructions(json['instructions']),
         course: json['course'],
         website: json['website'],
         type: json['type']);
   }
 }
 
-void getRecipe(ingredients) async {
-  var response = await http.get(Uri.parse('$api?ingredients=$ingredients'));
-  if (response.statusCode == 200) {}
+Future<List<Recipe>> getRecipe(ingredients) async {
+  print(ingredients);
+  List<Recipe> recipes_ = [];
+  if (ingredients != '') {
+    var response = await http.get(Uri.parse('$api?ingredients=$ingredients'));
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body) as List;
+      List<Recipe> temp_items_ =
+          data.map((json) => Recipe.fromJson(json)).toList();
+      for (int i = 0; i < temp_items_.length; i++) {
+        recipes_.add(temp_items_[i]);
+        if (temp_items_[i].type != 'V') {
+          print(temp_items_[i].type);
+        }
+      }
+    }
+  }
+  return recipes_;
 }
 
 Future<Recipe> getRandomRecipe(id) async {
@@ -58,7 +73,7 @@ Future<Recipe> getRandomRecipe(id) async {
     List<String> ingredients = getIngredients(data['ingredients']);
     recipe = Recipe(
         ingredients: ingredients,
-        instructions: data['instructions'],
+        instructions: getInstructions(data['instructions']),
         course: data['course'],
         website: data['website'],
         name: data['name'],
@@ -79,8 +94,25 @@ List<String> getIngredients(String ingredients) {
       ingredient = '';
     }
   }
-  print(ingredients_);
+
   return ingredients_;
+}
+
+String getInstructions(String instructions) {
+  String Instruction = '';
+
+  for (int i = 0; i < instructions.length; i++) {
+    if (instructions[i] == '.') {
+      print("hello");
+      Instruction += '.\n\n';
+      if (i != instructions.length - 1) {
+        Instruction += '*';
+      }
+    } else {
+      Instruction += instructions[i];
+    }
+  }
+  return Instruction;
 }
 
 class ItemProvider with ChangeNotifier {
@@ -147,7 +179,7 @@ class ItemProvider with ChangeNotifier {
     }
   }
 
-  Future<List<Recipe>> fetchitems(category) async {
+  Future<List<Recipe>> fetchrecipe(category) async {
     List<Recipe> recipes_ = [];
     final response = await http.get(Uri.parse(api));
     if (response.statusCode == 200) {

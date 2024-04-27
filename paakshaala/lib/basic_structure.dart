@@ -27,7 +27,7 @@ class _HomeState extends State<basic_structure> {
   @override
   void initState() {
     super.initState();
-    getrandom();
+    //  getrandom();
   }
 
   void getrandom() async {

@@ -1,10 +1,8 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:paakshaala/constants/fridge_items.dart';
 import 'package:paakshaala/fridge/add_category.dart';
 import 'package:paakshaala/fridge/category_card.dart';
-import 'package:provider/provider.dart';
 
 class Fridge extends StatefulWidget {
   @override
@@ -80,21 +78,3 @@ class _FridgeState extends State<Fridge> {
         ));
   }
 }
-
-/*class Fridgehelper extends StatelessWidget {
-  const Fridgehelper({super.key});
-  @override
-  Widget build(BuildContext context) {
-    final item_provider = Provider.of<ItemProvided>(context);
-    List<items> items_ = item_provider.get_items();
-    return Scaffold(
-        body: ListView.builder(
-            itemCount: items_.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title: Text(items_[index].category),
-                subtitle: Text(items_[index].item_name),
-              );
-            }));
-  }
-}*/
