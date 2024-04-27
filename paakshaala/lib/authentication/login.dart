@@ -137,7 +137,7 @@ class _LoginState extends State<Login> {
                                   otp = otp + num.toString();
                                 }
 
-                                /*   final SmtpServer = gmail(
+                                final SmtpServer = gmail(
                                     'recipe.teller.iitj@gmail.com',
                                     "jnbxxfynzzopiwid");
                                 final Message message = Message();
@@ -157,7 +157,7 @@ class _LoginState extends State<Login> {
                                 Future.delayed(const Duration(seconds: 60));
                                 setState(() {
                                   button_text = "Resend OTP";
-                                });*/
+                                });
                               },
                               child: Text(
                                 button_text,

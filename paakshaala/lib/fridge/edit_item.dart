@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paakshaala/constants/fonts.dart';
-import 'package:paakshaala/fridge/add_category.dart';
+
 import 'package:paakshaala/fridge/category_card.dart';
 import 'package:paakshaala/fridge/items.dart';
 import 'package:paakshaala/fridge/items_api.dart';

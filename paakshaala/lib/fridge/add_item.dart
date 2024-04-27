@@ -7,6 +7,9 @@ import 'package:paakshaala/fridge/category_card.dart';
 import 'package:paakshaala/fridge/items.dart';
 import 'package:paakshaala/fridge/items_api.dart';
 
+String unit = 'kg';
+int duration = 2;
+
 class AddItem extends StatefulWidget {
   const AddItem({super.key, required this.category});
   final String category;
@@ -60,30 +63,87 @@ class _AddItemState extends State<AddItem> {
                   const SizedBox(
                     height: 20,
                   ),
-                  TextField(
-                    controller: controller_quantity,
-                    keyboardType: TextInputType.number,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(10),
-                        hintText: "Enter Quantity of Item (in kg)",
-                        hintStyle: TextStyle(color: Colors.grey)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        width: 200,
+                        child: TextField(
+                          controller: controller_quantity,
+                          keyboardType: TextInputType.number,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.all(10),
+                              hintText: "Enter Quantity of Item",
+                              hintStyle: TextStyle(color: Colors.grey)),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        width: 50,
+                        child: DropdownMenu(
+                            width: 100,
+                            initialSelection: 1,
+                            textStyle: TextStyle(color: Colors.grey),
+                            onSelected: (value) {
+                              print(value);
+                              if (value == 2) {
+                                unit = 'ml';
+                              } else if (value == 3) {
+                                unit = 'g';
+                              } else if (value == 4) {
+                                unit = 'l';
+                              } else {
+                                unit = 'kg';
+                              }
+                            },
+                            dropdownMenuEntries: const [
+                              DropdownMenuEntry(value: 1, label: "kg"),
+                              DropdownMenuEntry(value: 2, label: "ml"),
+                              DropdownMenuEntry(value: 3, label: 'g'),
+                              DropdownMenuEntry(value: 4, label: 'l')
+                            ]),
+                      )
+                    ],
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  TextField(
-                    style: const TextStyle(color: Colors.white),
-                    keyboardType: TextInputType.datetime,
-                    controller: controller_date,
-                    decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        labelText: "Date of Entry",
-                        labelStyle: TextStyle(color: Colors.grey),
-                        contentPadding: EdgeInsets.all(10),
-                        hintText: "dd/mm/yyyy",
-                        hintStyle: TextStyle(color: Colors.grey)),
+                  Row(
+                    children: [
+                      Container(
+                        width: 200,
+                        alignment: Alignment.topLeft,
+                        child: TextField(
+                          style: const TextStyle(color: Colors.white),
+                          keyboardType: TextInputType.datetime,
+                          controller: controller_date,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            labelText: "Reminder Duration",
+                            labelStyle: TextStyle(color: Colors.grey),
+                            contentPadding: EdgeInsets.all(10),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 20),
+                      DropdownMenu(
+                          width: 110,
+                          initialSelection: 1,
+                          textStyle: TextStyle(color: Colors.grey),
+                          onSelected: (value) {
+                            duration = value!;
+                          },
+                          dropdownMenuEntries: const [
+                            DropdownMenuEntry(value: 1, label: "Months"),
+                            DropdownMenuEntry(value: 2, label: "Days"),
+                          ]),
+                    ],
                   )
                 ],
               ),
@@ -99,7 +159,7 @@ class _AddItemState extends State<AddItem> {
                   id: 0,
                   category: widget.category,
                   item_name: controller_item_name.text,
-                  quantity: controller_quantity.text,
+                  quantity: '${controller_quantity.text} $unit',
                   date: controller_date.text,
                 ));
 
